@@ -15,7 +15,8 @@ extends 1/8" beyond the cutter edge).
    `openscad -o out/hinge_router_template.stl hinge_router_template.scad`).
 3. Print it flat; with `print_flat = true` the template lies top-face-down with the fence pointing up.
 4. Clamp the template to the door edge with the fence against the face, set the
-   bit depth to the hinge leaf thickness, and rout clockwise inside the opening.
+   bit to stick out `bit_reach` below the router base, and rout clockwise inside
+   the opening. The mortise comes out `cut_depth` deep.
 
 The router bit leaves corners rounded to the cutter radius. Square them with a
 chisel, or set `hinge_corner_radius` to match radius-corner hinges.
@@ -29,7 +30,10 @@ chisel, or set `hinge_corner_radius` to match radius-corner hinges.
 | `hinge_corner_radius` | 0 | Corner radius of the hinge leaf (0 = square) |
 | `bit_diameter` | 0.5 | Cutter diameter |
 | `bearing_overhang` | 0.125 | How far the bearing extends beyond the cutter edge, per side. Negative if the bearing is smaller than the cutter. |
-| `plate_thickness` | 0.375 | Template plate thickness (the bearing must ride on it at full depth) |
+| `bit_reach` | 0.25 | How far the bit tip sticks out below the router base |
+| `cut_depth` | 0.09375 | Mortise depth below the template underside (half the closed hinge thickness) |
+| `router_base` | 6.0 | Router base diameter; sizes the lowered pocket the base rides in |
+| `plate_thickness` | 0.375 | Rim thickness outside the router pocket |
 | `margin` | 1.5 | Plate material around the opening |
 | `fence_depth` | 0.75 | How far the fence hangs down the door face |
 | `fence_thickness` | 0.375 | Fence thickness |
@@ -100,5 +104,6 @@ If you use a straight bit with a template guide bushing instead of a bearing, se
   the hinge leaf. The opening length must still be larger than the bearing so it
   can reach both ends.
 - Smaller cutters leave tighter corner radii (cutter diameter ÷ 2), which means less chiseling.
-- `plate_thickness` must be thick enough that the bearing or bushing still rides on the
-  template when the bit is set to the hinge leaf depth.
+- Where the router base rides, the top face is lowered to a guide surface
+  `bit_reach - cut_depth` thick (5/32" by default), so the bit cuts `cut_depth`
+  into the door. The bearing must still contact that guide edge.
