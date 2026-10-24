@@ -18,7 +18,7 @@ bearing_overhang = 0.125;  // how far the bearing extends beyond the cutter edge
 cut_depth        = 0.09375; // mortise depth into the door (half the closed hinge thickness)
 
 /* [Template] */
-plate_thickness = 0.375;   // must keep the bearing on the template at your cut depth
+plate_thickness = 0.75;    // must exceed cutter length (tip to bearing) minus cut_depth
 margin          = 1.5;     // plate material around the opening (each side)
 fence_depth     = 0.75;    // how far the fence hangs down the door face
 fence_thickness = 0.375;

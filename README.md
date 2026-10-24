@@ -15,7 +15,7 @@ extends 1/8" beyond the cutter edge).
    `openscad -o out/hinge_router_template.stl hinge_router_template.scad`).
 3. Print it flat; with `print_flat = true` the template lies top-face-down with the fence pointing up.
 4. Clamp the template to the door edge with the fence against the face, set the
-   bit to stick out `plate_thickness + cut_depth` below the router base (15/32"
+   bit to stick out `plate_thickness + cut_depth` below the router base (27/32"
    by default), and rout clockwise inside the opening.
 
 The router bit leaves corners rounded to the cutter radius. Square them with a
@@ -31,7 +31,7 @@ chisel, or set `hinge_corner_radius` to match radius-corner hinges.
 | `bit_diameter` | 0.5 | Cutter diameter |
 | `bearing_overhang` | 0.125 | How far the bearing extends beyond the cutter edge, per side. Negative if the bearing is smaller than the cutter. |
 | `cut_depth` | 0.09375 | Mortise depth into the door (half the closed hinge thickness) |
-| `plate_thickness` | 0.375 | Template plate thickness (the bearing must ride on it at full depth) |
+| `plate_thickness` | 0.75 | Template plate thickness; must exceed the bit's cutter length (tip to bearing) minus `cut_depth` so the bearing rides it |
 | `margin` | 1.5 | Plate material around the opening |
 | `fence_depth` | 0.75 | How far the fence hangs down the door face |
 | `fence_thickness` | 0.375 | Fence thickness |
@@ -103,4 +103,6 @@ If you use a straight bit with a template guide bushing instead of a bearing, se
   can reach both ends.
 - Smaller cutters leave tighter corner radii (cutter diameter ÷ 2), which means less chiseling.
 - `plate_thickness` must be thick enough that the bearing or bushing still rides on the
-  template when the bit is set to the hinge leaf depth.
+  template at full depth. With the tip at `cut_depth`, the bearing starts
+  `cutter length - cut_depth` above the door, so a 1/2" cutter needs more than
+  13/32"; the 3/4" default leaves 11/32" of edge for the bearing.
